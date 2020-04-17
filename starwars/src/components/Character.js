@@ -9,6 +9,7 @@ const CardHolder = styled.div`
     padding:2%;
     margin:2%;
     border-radius:20px;
+    width:42%;
     
 
     &:hover{
@@ -17,14 +18,26 @@ const CardHolder = styled.div`
 
 `
 
+const P = styled.p`
+    color:white;
+
+`
+const Header = styled.h1`
+    color: white;
+    &:hover{
+        color:black;
+    }
+`
+
+
 const Cards = props => {
 console.log(props.cards);
     return (
 
     <CardHolder className="cards">
-        <h1>Name: {props.cards.name}</h1>
-        <p>Height: {props.cards.height}</p>
-        <p>Birth Year: {props.cards.birth_year}</p>
+        <Header>Name: {props.cards.name}</Header>
+        <P>Height: {props.cards.height}</P>
+        <P>Birth Year: {props.cards.birth_year}</P>
 
     </CardHolder>
         
