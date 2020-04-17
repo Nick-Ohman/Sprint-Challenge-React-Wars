@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from "axios";
+import Character from './components/Character'
 import './App.css';
+import styled from 'styled-components'
 
-const App = () => {
+
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
 
@@ -9,9 +12,44 @@ const App = () => {
   // side effect in a component, you want to think about which state and/or props it should
   // sync up with, if any.
 
+ const BigWrap = styled.div`
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin:2%;
+ `
+
+
+const App = () => {
+
+  const [starWars, setStarWars] = useState([])
+
+
+  useEffect(() => {
+    axios.get("https://swapi.py4e.com/api/people/")
+    .then(res => setStarWars(res.data.results))
+    .catch(err => console.log(err, "error"))
+  }, []);
+
+
+  // Try to think through what state you'll need for this app before starting. Then build out
+  // the state properties here.
+
+  // Fetch characters from the star wars api in an effect hook. Remember, anytime you have a 
+  // side effect in a component, you want to think about which state and/or props it should
+  // sync up with, if any.
+
   return (
+    
     <div className="App">
-      <h1 className="Header">Characters</h1>
+      <h1 className="Header">Star Wars</h1>
+
+      <BigWrap className="starChar" >
+        {starWars.map((item, idx) => (
+          <Character key ={idx} cards={item} />
+          ))}
+      </BigWrap>
+          
     </div>
   );
 }
